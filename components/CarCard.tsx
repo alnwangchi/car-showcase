@@ -61,7 +61,7 @@ const CarCard: React.FC<Props> = ({ car }) => {
             onClick={() => setIsOpen(true)}
           />
         </div>
-        <CarDetail isOpen={isOpen} closeModal={() => setIsOpen(false)} car={car} />
+        <CarDetail isOpen={isOpen} onClose={() => setIsOpen(false)} car={car} />
       </div>
     </div>
   );
