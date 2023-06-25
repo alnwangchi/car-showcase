@@ -1,26 +1,31 @@
 import { Hero, SearchBar, CustomFilter } from '@/components';
 import Image from 'next/image';
 import { fuels, yearsOfProduction } from '@/constants';
+import { NavBar, Footer } from '@/components';
+
 export default function Home() {
   return (
-    <main className='overflow-hidden'>
-      <Hero />
-      <div className='mt-12 padding-x padding-y max-width' id='discover'>
-        <div className='home__text-container'>
-          <h1 className='text-4xl font-extrabold'>Car Catalogue</h1>
-          <p>Explore out cars you might like</p>
-        </div>
+    <>
+      <NavBar />
 
-        <div className='home__filters'>
-          <SearchBar />
-
-          <div className='home__filter-container'>
-            {/* <CustomFilter title='fuel' options={fuels} />
-            <CustomFilter title='year' options={yearsOfProduction} /> */}
+      <main className='overflow-hidden'>
+        <Hero />
+        <div className='mt-12 padding-x padding-y max-width' id='discover'>
+          <div className='home__text-container'>
+            <h1 className='text-4xl font-extrabold'>Car Catalogue</h1>
+            <p>Explore out cars you might like</p>
           </div>
-        </div>
 
-        {/* {!isDataEmpty ? (
+          <div className='home__filters'>
+            <SearchBar />
+
+            <div className='home__filter-container'>
+              {/* <CustomFilter title='fuel' options={fuels} />
+            <CustomFilter title='year' options={yearsOfProduction} /> */}
+            </div>
+          </div>
+
+          {/* {!isDataEmpty ? (
           <section>
             <div className='home__cars-wrapper'>
               {allCars?.map((car) => (
@@ -39,7 +44,9 @@ export default function Home() {
             <p>{allCars?.message}</p>
           </div>
         )} */}
-      </div>
-    </main>
+        </div>
+      </main>
+      <Footer />
+    </>
   );
 }
