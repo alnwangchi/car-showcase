@@ -1,9 +1,10 @@
 'use client';
 import { Dialog as HDialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useRef } from 'react';
 
 export default function Dialog() {
-  let [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const completeButtonRef = useRef(null);
 
   function closeModal() {
     setIsOpen(false);
@@ -26,7 +27,12 @@ export default function Dialog() {
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <HDialog as='div' className='relative z-10' onClose={closeModal}>
+        <HDialog
+          as='div'
+          className='relative z-10'
+          onClose={closeModal}
+          initialFocus={completeButtonRef}
+        >
           <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
@@ -54,6 +60,9 @@ export default function Dialog() {
                   <HDialog.Title as='h3' className='text-lg font-medium leading-6 text-gray-900'>
                     Payment successful
                   </HDialog.Title>
+                  <HDialog.Description>
+                    This will permanently deactivate your account
+                  </HDialog.Description>
                   <div className='mt-2'>
                     <p className='text-sm text-gray-500'>
                       Your payment has been successfully submitted. We’ve sent you an email with all
@@ -61,13 +70,22 @@ export default function Dialog() {
                     </p>
                   </div>
 
-                  <div className='mt-4'>
+                  <div className='mt-4 space-x-2'>
                     <button
                       type='button'
                       className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                       onClick={closeModal}
                     >
                       Got it, thanks!
+                    </button>
+                    <button
+                      className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-900 focus-visible:ring-offset-2'
+                      ref={completeButtonRef}
+                      onClick={() => {
+                        console.log('REF');
+                      }}
+                    >
+                      Complete order
                     </button>
                   </div>
                 </HDialog.Panel>
