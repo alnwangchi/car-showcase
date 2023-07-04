@@ -1,7 +1,8 @@
+import { CarDetailType, FilterProps } from "@/types";
 
-
-export const fetchCars = async () => {
-  const url = 'https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla';
+export const fetchCars = async (filter: FilterProps) => {
+  const { manufacturer, year, model, limit, fuel } = filter;
+  const url = `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`;
   const options = {
     method: 'GET',
     headers: {
@@ -33,3 +34,17 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
 
   return rentalRatePerDay.toFixed(0);
 };
+
+export const generateCarImageUrl = (car :CarDetailType, angle?: string ) => {
+  const url = new URL("https://cdn.imagin.studio/getimage");
+  const { make, model, year } = car;
+
+  url.searchParams.append('customer', 'hrjavascript-mastery');
+  url.searchParams.append('make', make);
+  url.searchParams.append('modelFamily', model.split(" ")[0]);
+  url.searchParams.append('zoomType', 'fullscreen');
+  url.searchParams.append('modelYear', `${year}`);
+  // url.searchParams.append('zoomLevel', zoomLevel);
+  url.searchParams.append('angle', `${angle}`);
+  return `${url}`
+}

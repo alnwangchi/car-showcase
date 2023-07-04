@@ -1,5 +1,5 @@
 'use client';
-import { calculateCarRent } from '@/utils';
+import { calculateCarRent, generateCarImageUrl } from '@/utils';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import CustomButton from './CustomButton';
@@ -26,13 +26,13 @@ const CarCard: React.FC<Props> = ({ car }) => {
         <span className='self-end text-[14px] leading-[17px] font-medium'>/day</span>
       </p>
       <div className='relative w-full h-40 my-3 object-contain'>
-        {/* <Image
+        <Image
           src={generateCarImageUrl(car)}
           alt='car model'
           fill
           priority
           className='object-contain'
-        /> */}
+        />
       </div>
       <div className='relative flex w-full mt-2'>
         <div className='flex group-hover:invisible w-full justify-between text-grey'>

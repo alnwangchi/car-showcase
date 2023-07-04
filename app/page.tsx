@@ -3,9 +3,23 @@ import Image from 'next/image';
 import { fuels, yearsOfProduction } from '@/constants';
 import { NavBar, Footer } from '@/components';
 import { fetchCars } from '@/utils';
+import { FilterProps } from '@/types';
 
-export default async function Home() {
-  const allCars = await fetchCars();
+export default async function Home({
+  params,
+  searchParams,
+}: {
+  params: { slug: string };
+  searchParams: FilterProps;
+}) {
+  console.log('🚀 ~ params:', { params, searchParams });
+  const allCars = await fetchCars({
+    manufacturer: searchParams.manufacturer || '',
+    year: searchParams.year || 2022,
+    fuel: searchParams.fuel || '',
+    limit: searchParams.limit || 10,
+    model: searchParams.model || '',
+  });
   const isDataEmpty = allCars.length === 0 || !Array.isArray(allCars);
   return (
     <>
